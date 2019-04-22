@@ -6,23 +6,19 @@ def call(method=null, Closure body={}) {
 
     print "Setting up Homebrew!"
 
-
-    println "-----"
     // def out = new StringBuilder(), err = new StringBuilder()
-    def out = new StringBuffer()
-    def err = new StringBuffer()
-
+    // def out = new StringBuffer()
+    // def err = new StringBuffer()
     def command = "command -v ${metarunner}"
-    println command
-    Process process = command.execute()
-    process.consumeProcessOutput(out, err)
-    process.waitFor()
-    // process.waitForOrKill(1000000000000)
-    println process.text
-    // if( sout.size() > 0 )
-    println out.toString()
-    // if( serr.size() > 0 )
-    println err.toString()
+    // Process process = command.execute()
+    // process.consumeProcessOutput(out, err)
+    // process.waitFor()
+    // process.waitForOrKill(1000)
+    // println process.text
+    // if( sout.size() > 0 ) println out.toString()
+    // if( serr.size() > 0 ) println err.toString()
+    def out = sh(returnStdout: true, script: command).trim()
+    println out
     println "-----"
 
     if (!"command -v ${metarunner}".execute().text.trim()) {
