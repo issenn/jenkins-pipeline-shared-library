@@ -14,6 +14,8 @@ def call(method=null, Closure body={}) {
     if (!fileExists("/usr/local/bin/brew")) {
         print("not found")
 
+    } else {
+        print("found")
     }
 
 
