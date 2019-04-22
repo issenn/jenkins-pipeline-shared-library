@@ -1,10 +1,11 @@
 #!/usr/bin/env groovy
 
+import io.issenn.jenkins.utils.utils
 
 def call(method=null, Closure body={}) {
     def metarunner = 'brew'
 
-    print "Setting up Homebrew!"
+    println("Setting up Homebrew!")
 
     def command = "command -v ${metarunner}"
     // def out = new StringBuilder(), err = new StringBuilder()
@@ -32,5 +33,5 @@ def call(method=null, Closure body={}) {
 
 def installHomebrew(metarunner) {
     print "Installing ${metarunner}"
-    // new .pedrocesar.utils().installMetarunner(metarunner)
+    new utils().installHomebrew()
 }

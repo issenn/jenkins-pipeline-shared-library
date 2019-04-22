@@ -6,6 +6,7 @@ import com.cloudbees.groovy.cps.NonCPS
 
 @NonCPS
 def installHomebrew() {
+    println("Installing Homebrew")
     sh """
     /usr/bin/ruby -e "\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     """
