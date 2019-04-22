@@ -37,10 +37,8 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                sh "env"
+                // sh "env"
                 // sh "ls ${JENKINS_HOME}/"
-                sh "command -v brew"
-                sh "which brew"
                 withHomebrew()
             }
         }
