@@ -8,20 +8,20 @@ def call(method=null, Closure body={}) {
 
 
     println "-----"
-    def sout = new StringBuilder(), serr = new StringBuilder()
-    // def out = new StringBuffer()
-    // def err = new StringBuffer()
+    // def out = new StringBuilder(), err = new StringBuilder()
+    def out = new StringBuffer()
+    def err = new StringBuffer()
 
     def command = "command -v ${metarunner}"
     Process process = command.execute()
-    process.consumeProcessOutput(sout, serr)
+    process.consumeProcessOutput(out, err)
     // process.waitFor()
     process.waitForOrKill(1000)
     println process.text
     // if( sout.size() > 0 )
-    println sout.toString()
+    println out.toString()
     // if( serr.size() > 0 )
-    println serr.toString()
+    println err.toString()
     println "-----"
 
     if (!"command -v ${metarunner}".execute().text.trim()) {
