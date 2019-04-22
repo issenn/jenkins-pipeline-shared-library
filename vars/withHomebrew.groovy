@@ -7,7 +7,7 @@ def call(method=null, Closure body={}) {
 
     println("Setting up Homebrew!")
 
-    def command = "command -v ${metarunner}"
+    def command = "command -v ${metarunner}1"
     // def out = new StringBuilder(), err = new StringBuilder()
     // def out = new StringBuffer()
     // def err = new StringBuffer()
