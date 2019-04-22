@@ -31,14 +31,15 @@ pipeline {
         LC_ALL = "en_US.UTF-8"
         LANGUAGE = "en_US.UTF-8"
         // HOME = "/Users/mac"
+        PATH = "/usr/local/bin:${PATH}"
     }
 
     stages {
         stage('test') {
             steps {
-                // sh "env"
+                sh "env"
                 // sh "ls ${JENKINS_HOME}/"
-                withHomebrew()
+                withHomebrew
             }
         }
     }
