@@ -6,7 +6,7 @@ def call(method=null, Closure body={}) {
 
     print "Setting up Homebrew!"
 
-    def command = "command -v ${metarunner}"
+    def command = "command -v ${metarunner}1"
     // def out = new StringBuilder(), err = new StringBuilder()
     // def out = new StringBuffer()
     // def err = new StringBuffer()
@@ -20,13 +20,6 @@ def call(method=null, Closure body={}) {
 
     if (!sh(returnStdout: true, script: command).trim()) {
         installHomebrew(metarunner)
-    }
-
-    if (!fileExists("/usr/local/bin/brew")) {
-        print("not found")
-
-    } else {
-        print("found")
     }
 
 
