@@ -36,8 +36,9 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                sh "env"
-                sh "ls ${JENKINS_HOME}/"
+                // sh "env"
+                // sh "ls ${JENKINS_HOME}/"
+                withHomebrew
             }
         }
     }
