@@ -17,14 +17,12 @@ def call(method=null, Closure body={}) {
     // println process.text
     // if( sout.size() > 0 ) println out.toString()
     // if( serr.size() > 0 ) println err.toString()
-    def out = sh(returnStdout: true, script: command).trim()
-    println out
-    println "-----"
 
-    if (!sh(returnStdout: true, script: command).trim()) {
+    try {
+        sh(returnStdout: true, script: command)
+    } catch(Exception ex) {
         installHomebrew(metarunner)
     }
-
 
     if (method == 'clean') {
         print "Removing Homebrew!!!"
