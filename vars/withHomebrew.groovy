@@ -15,8 +15,8 @@ def call(method=null, Closure body={}) {
     // process.waitFor()
     // process.waitForOrKill(1000)
     // println process.text
-    // if( sout.size() > 0 ) println out.toString()
-    // if( serr.size() > 0 ) println err.toString()
+    // if( out.size() > 0 ) println out.toString()
+    // if( err.size() > 0 ) println err.toString()
 
     try {
         sh(returnStdout: true, script: command)
