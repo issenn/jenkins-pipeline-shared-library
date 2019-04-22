@@ -3,7 +3,7 @@
 import org.jenkinsci.plugins.workflow.libs.Library
 
 
-@Library('github.com/Taki-Kun/testJenkinsSharedLibraries@master') _
+@Library('github.com/Taki-Kun/jenkins-pipeline-shared-groovy-library@master') _
 /*
 library(
     identifier: 'github.com/Taki-Kun/testJenkinsSharedLibraries@master',
