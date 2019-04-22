@@ -5,6 +5,13 @@ package io.issenn.jenkins.utils
 import com.cloudbees.groovy.cps.NonCPS
 
 @NonCPS
+def installHomebrew() {
+    sh """
+    /usr/bin/ruby -e "\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    """
+}
+
+@NonCPS
 def installMetarunner(String metarunner){
     sh """ 
   git clone https://github.com/${metarunner}/${metarunner}.git ${JENKINS_HOME}/.${metarunner}
