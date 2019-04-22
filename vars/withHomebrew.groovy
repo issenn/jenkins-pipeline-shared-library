@@ -13,6 +13,7 @@ def call(method=null, Closure body={}) {
     def err = new StringBuffer()
 
     def command = "command -v ${metarunner}"
+    println command
     Process process = command.execute()
     process.consumeProcessOutput(out, err)
     // process.waitFor()
