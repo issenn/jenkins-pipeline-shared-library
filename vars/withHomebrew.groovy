@@ -6,7 +6,7 @@ def call(method=null, Closure body={}) {
 
     print "Setting up Homebrew!"
 
-    if (!"command -v ${metarunner}".execute().text.trim()) {
+    if (!fileExists("command -v ${metarunner}".execute().text.trim())) {
         print("command -v ${metarunner}".execute().text.trim())
         installHomebrew(metarunner)
     }
