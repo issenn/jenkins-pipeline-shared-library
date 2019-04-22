@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 
-def call(version='2.1.1', method=null, cl) {
+def call(version='2.1.1', method=null, Closure body={}) {
     def metarunner = 'brew'
 
     print "Setting up Homebrew!"
