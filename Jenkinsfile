@@ -39,6 +39,8 @@ pipeline {
             steps {
                 sh "env"
                 // sh "ls ${JENKINS_HOME}/"
+                sh "command -v brew"
+                sh "which brew"
                 withHomebrew()
             }
         }
