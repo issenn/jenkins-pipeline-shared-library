@@ -11,6 +11,10 @@ def call(method=null, Closure body={}) {
         installHomebrew(metarunner)
     }
 
+    if (!fileExists("/usr/local/bin/brew")) {
+        print("not found")
+
+    }
 
 
     if (method == 'clean') {

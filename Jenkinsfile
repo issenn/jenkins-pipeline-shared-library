@@ -31,7 +31,7 @@ pipeline {
         LC_ALL = "en_US.UTF-8"
         LANGUAGE = "en_US.UTF-8"
         // HOME = "/Users/mac"
-        PATH = "/usr/local/bin:${PATH}"
+        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
     }
 
     stages {
