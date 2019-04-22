@@ -7,6 +7,7 @@ def call(method=null, Closure body={}) {
     print "Setting up Homebrew!"
 
 
+    println "-----"
     def sout = new StringBuilder(), serr = new StringBuilder()
     // def out = new StringBuffer()
     // def err = new StringBuffer()
@@ -17,8 +18,11 @@ def call(method=null, Closure body={}) {
     // process.waitFor()
     process.waitForOrKill(1000)
     println process.text
-    if( sout.size() > 0 ) println sout.toString()
-    if( serr.size() > 0 ) println serr.toString()
+    // if( sout.size() > 0 )
+    println sout.toString()
+    // if( serr.size() > 0 )
+    println serr.toString()
+    println "-----"
 
     if (!"command -v ${metarunner}".execute().text.trim()) {
         print("command -v ${metarunner}".execute().text.trim())
