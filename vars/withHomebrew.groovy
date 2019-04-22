@@ -16,8 +16,8 @@ def call(method=null, Closure body={}) {
     println command
     Process process = command.execute()
     process.consumeProcessOutput(out, err)
-    // process.waitFor()
-    process.waitForOrKill(1000)
+    process.waitFor()
+    // process.waitForOrKill(1000000000000)
     println process.text
     // if( sout.size() > 0 )
     println out.toString()
