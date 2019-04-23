@@ -46,8 +46,8 @@ pipeline {
                 withRbenv() {
                     sh "rbenv version"
                     sh "ruby --version"
+                    sh "gem install bundler"
                     sh "bundle install"
-                    sh "bundle exec fastlane ios do_publish_all"
                 }
             }
         }
