@@ -20,12 +20,6 @@ def call(version='2.5.1', method=null, Closure body={}) {
         installRbenv("rbenv-vars")
     }
 
-    if (fileExists("/usr/local/bin/rbenv")) {
-        println("found")
-    }
-
-    sh "env"
-
     if (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
         sh "env"
         /*

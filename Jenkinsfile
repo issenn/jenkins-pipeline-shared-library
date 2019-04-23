@@ -39,7 +39,7 @@ pipeline {
             steps {
                 // sh "env"
                 // sh "ls ${JENKINS_HOME}/"
-                withRbenv()
+                withRbenv("2.6.2")
             }
         }
     }
