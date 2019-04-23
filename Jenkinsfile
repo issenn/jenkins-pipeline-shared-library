@@ -21,7 +21,7 @@ library(
 pipeline {
     agent {
         node {
-            label 'master'
+            label 'mac-mini3'
             customWorkspace "workspace/${JOB_NAME.replace('%2F', '/')}"
         }
     }
