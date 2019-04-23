@@ -40,7 +40,7 @@ def call(Map parameters = [:], String version = '2.6.3', String method = null, C
     }
 
     withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH", "RBENV_SHELL=zsh"]) {
-        // sh "${metarunner} rehash"
+        sh "${metarunner} rehash"
         body()
     }
 

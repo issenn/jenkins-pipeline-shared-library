@@ -104,10 +104,6 @@ GEM
       xcodeproj (>= 1.8.1, < 2.0.0)
       xcpretty (~> 0.3.0)
       xcpretty-travis-formatter (>= 0.0.3)
-    fastlane-plugin-changelog (0.9.0)
-    fastlane-plugin-firim (0.2.0)
-      firim (~> 0)
-    fastlane-plugin-send_e_mail (0.1.4)
     firim (0.2.1)
       faraday (~> 0.9)
       faraday_middleware (~> 0.9)
@@ -223,13 +219,10 @@ PLATFORMS
 DEPENDENCIES
   cocoapods
   fastlane
-  fastlane-plugin-changelog
-  fastlane-plugin-firim
-  fastlane-plugin-send_e_mail
   firim
   java-properties
   rest-client
   xcode-install
 
 BUNDLED WITH
-   1.16.6
+   2.0.1
