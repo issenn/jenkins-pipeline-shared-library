@@ -32,11 +32,10 @@ def call(String version='2.5.1', String method=null, Closure cl) {
         }
     }
 
-    /*
     withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH", "RBENV_SHELL=zsh"]) {
         // sh "${metarunner} rehash"
         cl()
-    }*/
+    }
 
     if (method == 'clean') {
         print "Removing Ruby ${version}!!!"
