@@ -33,6 +33,7 @@ def call(Map parameters = [:], String version = '2.6.3', String method = null, C
                 "--disable-install-doc --with-readline-dir=\$(brew --prefix readline)")
         } catch(Exception ex) {
             println(ex)
+        } finally {
             sh "rm -rf $HOME/.${metarunner}/versions/system"
         }
     }
