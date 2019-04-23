@@ -5,7 +5,7 @@ import io.issenn.jenkins.utils.utils
 def call(Map parameters = [:], Closure cl={}) {
 
     String version = parameters.get('version', '2.5.1')
-    String method = parameters.get('method', 'kepp')
+    String method = parameters.get('method', 'keep')
 
     String metarunner = 'rbenv'
 
