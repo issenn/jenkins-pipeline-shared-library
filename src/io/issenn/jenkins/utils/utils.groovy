@@ -6,10 +6,14 @@ import com.cloudbees.groovy.cps.NonCPS
 
 @NonCPS
 def installHomebrew() {
-    println("Installing Homebrew")
-    //sh """
-    // /usr/bin/ruby -e "\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    // """
+    sh """
+    /usr/bin/ruby -e "\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    """
+}
+
+@NonCPS
+def installMetarunnerOnMac(String metarunner){
+    sh(script: "brew install ${metarunner}")
 }
 
 @NonCPS
