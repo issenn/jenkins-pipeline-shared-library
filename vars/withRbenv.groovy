@@ -53,7 +53,6 @@ def call(Map parameters = [:], String version = '2.6.3', String method = null, C
 def installRbenv(String metarunner, String default_ruby_version) {
     println("Installing ${metarunner}")
     new utils().installMetarunnerOnHomebrew(metarunner)
-    sh "${metarunner} rehash"
 
     while (!fileExists("$HOME/.${metarunner}/versions/${default_ruby_version}/")) {
         try {
