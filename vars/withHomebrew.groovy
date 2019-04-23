@@ -2,8 +2,8 @@
 
 import io.issenn.jenkins.utils.utils
 
-def call(method=null, Closure body={}) {
-    def metarunner = 'brew'
+def call(String method=null, Closure body={}) {
+    String metarunner = 'brew'
 
     println("Setting up Homebrew!")
 
@@ -27,7 +27,7 @@ def call(method=null, Closure body={}) {
     }
 }
 
-def installHomebrew(metarunner) {
+def installHomebrew(String metarunner) {
     print "Installing ${metarunner}"
     new utils().installHomebrew()
 }

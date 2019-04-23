@@ -2,8 +2,8 @@
 
 import io.issenn.jenkins.utils.utils
 
-def call(version='2.5.1', method=null, Closure body={}) {
-    def metarunner = 'rbenv'
+def call(String version='2.5.1', String method=null, Closure body={}) {
+    String metarunner = 'rbenv'
     def utils = new utils()
 
     print "Setting up Ruby version ${version}!"
@@ -22,7 +22,8 @@ def call(version='2.5.1', method=null, Closure body={}) {
 
     if (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
         withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
-            utils.installVersion(metarunner, version)
+            utils.installVersion(metarunner, version,
+                "--disable-install-doc --with-readline-dir=\$(brew --prefix readline)")
         }
     }
 /*
@@ -39,7 +40,7 @@ def call(version='2.5.1', method=null, Closure body={}) {
     }*/
 }
 
-def installRbenv(metarunner) {
+def installRbenv(String metarunner) {
     println("Installing ${metarunner}")
     new utils().installMetarunnerOnMac(metarunner)
 }

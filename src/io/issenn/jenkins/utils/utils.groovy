@@ -27,8 +27,14 @@ def installMetarunner(String metarunner){
 }
 
 @NonCPS
-def installVersion(String metarunner, String version) {
-    sh "${metarunner} install ${version}"
+def installVersion(String metarunner, String version, String configure_opts=null) {
+    if (configure_opts) {
+        sh "CONFIGURE_OPTS=\"${configure_opts}\" ${metarunner} install ${version}"
+    } else {
+        sh "${metarunner} install ${version}"
+    }
+
+
 }
 
 @NonCPS
