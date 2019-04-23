@@ -11,6 +11,7 @@ def call(String version='2.5.1', String method=null, Map parameters = [:], Closu
 
     println(version)
     println(method)
+    println(parameters)
 
     String metarunner = 'rbenv'
 
