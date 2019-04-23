@@ -64,8 +64,12 @@ def installRbenv(String metarunner, String default_ruby_version) {
         } finally {
             sh "rm -rf $HOME/.${metarunner}/versions/system"
             sh "rm -rf $HOME/.${metarunner}/versions/${default_ruby_version}/gemsets"
-            sh "${metarunner} global ${default_ruby_version}"
-            sh "${metarunner} rehash"
+            println('-----')
+            sh "ls -la $HOME/.${metarunner}/versions/${default_ruby_version} && ${metarunner} global ${default_ruby_version} && ls -la $HOME/.${metarunner}/versions/${default_ruby_version}"
+            println('-----')
+            // sh "${metarunner} global ${default_ruby_version}"
+            sh "ls -la $HOME/.${metarunner}/versions/${default_ruby_version} && ${metarunner} rehash && ls -la $HOME/.${metarunner}/versions/${default_ruby_version}"
+            println('-----')
         }
     }
 }
