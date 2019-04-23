@@ -2,7 +2,7 @@
 
 import io.issenn.jenkins.utils.utils
 
-def call(version='2.5.1', method=null, cl) {
+def call(version='2.5.1', method=null, Closure body={}) {
     def metarunner = 'rbenv'
     def utils = new utils()
 
