@@ -50,6 +50,7 @@ pipeline {
                             sh "ruby --version"
                         }
                     } catch(Exception ex) {
+                        println("test")
                     }
                 }
 
