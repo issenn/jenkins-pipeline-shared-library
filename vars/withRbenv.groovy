@@ -28,10 +28,9 @@ def call(String version='2.5.1', String method=null, Closure body={}) {
     }
 
     sh "rbenv version"
-    sh "ruby --version"
 
     withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
-        sh "${metarunner} rehash"
+        sh "${metarunner} rehash && ruby --version"
         body()
     }
 
