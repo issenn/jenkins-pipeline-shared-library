@@ -43,26 +43,11 @@ pipeline {
             steps {
                 // sh "env"
                 // sh "ls ${JENKINS_HOME}/"
-                script {
-                    try {
-                        withRbenv() {
-                            sh "rbenv version"
-                            sh "ruby --version"
-                        }
-                    } catch(Exception ex) {
-                        println("test")
-                    }
-                }
-
-            }
-        }
-
-        stage('Test') {
-            steps {
-                withRbenv() {
+                withRbenv() /*{
                     sh "rbenv version"
                     sh "ruby --version"
-                }
+                }*/
+
             }
         }
     }

@@ -22,9 +22,13 @@ def call(String version='2.5.1', String method=null, Closure cl={}) {
         installRbenv(metarunner)
     }
 
-    if (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
-        utils.installVersion(metarunner, version,
-            "--disable-install-doc --with-readline-dir=\$(brew --prefix readline)")
+    while (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
+        try {
+            utils.installVersion(metarunner, version,
+                "--disable-install-doc --with-readline-dir=\$(brew --prefix readline)")
+        } catch(Exception ex) {
+            println(ex)
+        }
     }
 
     withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH", "RBENV_SHELL=zsh"]) {
