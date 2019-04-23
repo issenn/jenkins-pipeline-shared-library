@@ -2,7 +2,7 @@
 
 import io.issenn.jenkins.utils.utils
 
-def call(String version='2.5.1', String method=null, Closure cl={}) {
+def call(String version='2.5.1', String method=null, Closure cl) {
     String metarunner = 'rbenv'
 
     if (fileExists(".ruby-version")) {
