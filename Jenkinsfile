@@ -45,10 +45,8 @@ pipeline {
                 // sh "ls ${JENKINS_HOME}/"
                 withRbenv() {
                     sh "rbenv versions"
-                    sh "whence -av gem"
-                    sh "which -av gem"
-                    sh "whence -av ruby"
-                    sh "which -a ruby"
+                    sh "command -v gem"
+                    sh "command -v ruby"
                     sh "ruby --version"
                     sh "gem --version"
                     sh "gem install bundler"
