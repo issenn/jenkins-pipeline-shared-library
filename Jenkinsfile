@@ -26,6 +26,10 @@ pipeline {
         }
     }
 
+    options {
+        ansiColor('xterm')
+    }
+
     environment {
         LANG = "C.UTF-8"
         LC_ALL = "en_US.UTF-8"
@@ -40,7 +44,6 @@ pipeline {
                 // sh "env"
                 // sh "ls ${JENKINS_HOME}/"
                 withRbenv()
-                withRbenv("2.5.2", "clean")
             }
         }
     }
