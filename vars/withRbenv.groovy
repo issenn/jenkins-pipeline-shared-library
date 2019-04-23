@@ -6,7 +6,8 @@ def call(String version='2.5.1', String method=null, Closure body={}) {
     String metarunner = 'rbenv'
 
     if (fileExists(".ruby-version")) {
-        version = readFile(file: ".ruby-version", encoding: "utf-8")
+        def ruby_version = readFile(file: ".ruby-version", encoding: "utf-8").trim()
+        if (ruby_version) version = ruby_version
     }
 
     def utils = new utils()
