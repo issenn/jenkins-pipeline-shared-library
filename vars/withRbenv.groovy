@@ -2,7 +2,7 @@
 
 import io.issenn.jenkins.utils.utils
 
-def call(String version='2.5.1', String method=null, Closure body={}) {
+def call(String version='2.5.1', String method=null, Closure cl={}) {
     String metarunner = 'rbenv'
 
     if (fileExists(".ruby-version")) {
@@ -27,21 +27,13 @@ def call(String version='2.5.1', String method=null, Closure body={}) {
             "--disable-install-doc --with-readline-dir=\$(brew --prefix readline)")
     }
 
-    sh "rbenv version"
-    sh "rbenv versions"
-
-    withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
+    withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH", "RBENV_SHELL=zsh"]) {
         // sh "${metarunner} rehash"
-        sh "ruby --version"
-        sh "ls $HOME/.${metarunner}/versions"
-        body()
+        cl()
     }
-
-    sh "rbenv versions"
 
     if (method == 'clean') {
         print "Removing Ruby ${version}!!!"
-        sh "rbenv versions"
         utils.deleteVersion(metarunner, version)
     }
 }
