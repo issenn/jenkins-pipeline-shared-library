@@ -63,7 +63,6 @@ def installRbenv(String metarunner, String default_ruby_version) {
         } finally {
             sh "rm -rf $HOME/.${metarunner}/versions/system"
             sh "${metarunner} global ${default_ruby_version}"
-            sh "${metarunner} rehash"
         }
     }
 }
