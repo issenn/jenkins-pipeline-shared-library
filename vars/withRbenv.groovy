@@ -22,7 +22,6 @@ def call(String version='2.5.1', String method=null, Closure cl) {
         installRbenv(metarunner)
     }
 
-/*
     while (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
         try {
             utils.installVersion(metarunner, version,
