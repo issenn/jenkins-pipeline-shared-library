@@ -39,6 +39,8 @@ pipeline {
             steps {
                 // sh "env"
                 // sh "ls ${JENKINS_HOME}/"
+                // def ruby_version =
+                readFile(file: ".ruby-version", encoding: "utf-8")
                 withRbenv("2.5.0")
             }
         }

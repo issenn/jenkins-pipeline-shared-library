@@ -21,23 +21,28 @@ def call(String version='2.5.1', String method=null, Closure body={}) {
     }
 
     if (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
-        withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
-            utils.installVersion(metarunner, version,
-                "--disable-install-doc --with-readline-dir=\$(brew --prefix readline)")
-        }
-    }
-/*
-    withEnv(["PATH=$HOME/.${metarunner}/shims:$HOME/.${metarunner}/bin/:$PATH", "NODENV_SHELL=sh"]) {
-        sh "${metarunner} rehash && ${metarunner} local ${version}"
-        cl()
+        utils.installVersion(metarunner, version,
+            "--disable-install-doc --with-readline-dir=\$(brew --prefix readline)")
     }
 
+    sh "rbenv version"
+
+    /*
+    withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
+        sh "${metarunner} rehash && ${metarunner} local ${version}"
+        body()
+    }
+
+     */
+/*
     if (method == 'clean') {
         print "Removing Ruby ${version}!!!"
         withEnv(["PATH=$HOME/.${metarunner}/bin/:$PATH"]) {
             utils.deleteVersion(metarunner, version)
         }
-    }*/
+    }
+
+ */
 }
 
 def installRbenv(String metarunner) {
