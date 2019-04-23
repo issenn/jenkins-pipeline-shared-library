@@ -15,14 +15,14 @@ def call(String version='2.5.1', String method=null, Closure cl) {
     print "Setting up Ruby version ${version}!"
 
     def command = "command -v ${metarunner}"
-/*
+
     try {
         sh(returnStdout: true, script: command)
     } catch(Exception ex) {
         installRbenv(metarunner)
     }
 
-
+/*
     while (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
         try {
             utils.installVersion(metarunner, version,
