@@ -2,7 +2,7 @@
 
 import io.issenn.jenkins.utils.utils
 
-def call(String method=null, Closure body={}) {
+def call(Map parameters = [:], String method=null, Closure body) {
     String metarunner = 'brew'
 
     println("Setting up Homebrew!")
