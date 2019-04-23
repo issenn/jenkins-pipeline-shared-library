@@ -3,11 +3,11 @@
 import io.issenn.jenkins.utils.utils
 
 
-def call(String version='2.5.1', String method=null, Closure cl={}) {
-// def call(Map parameters = [:], Closure body) {
+// def call(String version='2.5.1', String method=null, Closure cl={}) {
+def call(Map parameters = [:], Closure body) {
 
-    // String version = parameters.get('version', '2.5.1')
-    // String method = parameters.get('method', 'keep')
+    String version = parameters.get('version', '2.5.1')
+    String method = parameters.get('method', 'keep')
 
     String metarunner = 'rbenv'
 
