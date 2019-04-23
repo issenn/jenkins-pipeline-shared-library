@@ -13,9 +13,9 @@ def call(String version='2.5.1', String method=null, Closure cl) {
     def utils = new utils()
 
     print "Setting up Ruby version ${version}!"
-/*
-    def command = "command -v ${metarunner}"
 
+    def command = "command -v ${metarunner}"
+/*
     try {
         sh(returnStdout: true, script: command)
     } catch(Exception ex) {
