@@ -28,15 +28,20 @@ def call(String version='2.5.1', String method=null, Closure body={}) {
     }
 
     sh "rbenv version"
+    sh "rbenv versions"
 
     withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
         // sh "${metarunner} rehash"
         sh "ruby --version"
+        sh "ls $HOME/.${metarunner}/versions"
         body()
     }
 
+    sh "rbenv versions"
+
     if (method == 'clean') {
         print "Removing Ruby ${version}!!!"
+        sh "rbenv versions"
         utils.deleteVersion(metarunner, version)
     }
 }
