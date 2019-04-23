@@ -8,7 +8,7 @@ def call(version='2.5.1', method=null, Closure body={}) {
 
     print "Setting up Ruby version ${version}!"
 
-    def command = "command -v ${metarunner}1"
+    def command = "command -v ${metarunner}"
 
     try {
         sh(returnStdout: true, script: command)
@@ -21,12 +21,9 @@ def call(version='2.5.1', method=null, Closure body={}) {
     }
 
     if (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
-        sh "env"
-        /*
         withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
-            sh "env"
             utils.installVersion(metarunner, version)
-        }*/
+        }
     }
 /*
     withEnv(["PATH=$HOME/.${metarunner}/shims:$HOME/.${metarunner}/bin/:$PATH", "NODENV_SHELL=sh"]) {
