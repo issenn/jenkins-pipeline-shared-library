@@ -43,9 +43,11 @@ pipeline {
             steps {
                 // sh "env"
                 // sh "ls ${JENKINS_HOME}/"
-                withRbenv("2.5.3", arg1: "a") {
+                withRbenv() {
                     sh "rbenv version"
                     sh "ruby --version"
+                    sh "bundle install"
+                    sh "bundle exec fastlane ios do_publish_all"
                 }
             }
         }
