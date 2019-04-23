@@ -20,10 +20,6 @@ def call(String version='2.5.1', String method=null, Closure body={}) {
         sh(returnStdout: true, script: command)
     } catch(Exception ex) {
         installRbenv(metarunner)
-        installRbenv("ruby-build")
-        installRbenv("readline")
-        installRbenv("rbenv-gemset")
-        installRbenv("rbenv-vars")
     }
 
     if (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
@@ -47,7 +43,7 @@ def call(String version='2.5.1', String method=null, Closure body={}) {
 
 def installRbenv(String metarunner) {
     println("Installing ${metarunner}")
-    new utils().installMetarunnerOnMac(metarunner)
+    new utils().installMetarunnerOnHomebrew(metarunner)
 }
 
 def purgeAll(String metarunner) {

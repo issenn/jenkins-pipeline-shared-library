@@ -13,8 +13,9 @@ def installHomebrew() {
 }
 
 @NonCPS
-def installMetarunnerOnMac(String metarunner){
-    sh(script: "brew install ${metarunner}")
+def installMetarunnerOnHomebrew(String metarunner){
+    // sh(script: "brew install ${metarunner}")
+    sh(script: "brew bundle")
 }
 
 @NonCPS
