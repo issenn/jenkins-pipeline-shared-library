@@ -4,7 +4,7 @@ import io.issenn.jenkins.utils.utils
 
 
 // def call(String version='2.5.1', String method=null, Closure cl={}) {
-def call(Map parameters = [:], Closure cl={}) {
+def call(Map parameters = [:], Closure body) {
 
     String version = parameters.get('version', '2.5.1')
     String method = parameters.get('method', 'keep')
@@ -40,7 +40,7 @@ def call(Map parameters = [:], Closure cl={}) {
 
     withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH", "RBENV_SHELL=zsh"]) {
         // sh "${metarunner} rehash"
-        cl()
+        body()
     }
 
     if (method == 'clean') {
