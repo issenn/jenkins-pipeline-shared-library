@@ -37,7 +37,7 @@ def installVersion(String metarunner, String version, String configure_opts=null
 
 @NonCPS
 def deleteVersion(String metarunner, String version) {
-    sh "${metarunner} uninstall ${version}"
+    sh "${metarunner} uninstall -f ${version}"
     // File directory = new File("${HOME}/.${metarunner}/versions/${version}")
     // directory.deleteDir()
 }
