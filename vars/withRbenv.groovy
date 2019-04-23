@@ -24,7 +24,7 @@ def call(Map parameters = [:], String version = '2.6.3', String method = null, C
     try {
         sh(returnStdout: true, script: command)
     } catch(Exception ex) {
-        installRbenv(metarunner)
+        installRbenv(metarunner, '2.6.3')
     }
 
     while (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
@@ -49,9 +49,20 @@ def call(Map parameters = [:], String version = '2.6.3', String method = null, C
     }
 }
 
-def installRbenv(String metarunner) {
+def installRbenv(String metarunner, String default_ruby_version) {
     println("Installing ${metarunner}")
     new utils().installMetarunnerOnHomebrew(metarunner)
+
+    while (!fileExists("$HOME/.${metarunner}/versions/${default_ruby_version}/")) {
+        try {
+            new utils().installVersion(metarunner, default_ruby_version,
+                "--disable-install-doc --with-readline-dir=\$(brew --prefix readline)")
+        } catch(Exception ex) {
+            println(ex)
+        } finally {
+            sh "rm -rf $HOME/.${metarunner}/versions/system"
+        }
+    }
 }
 
 def purgeAll(String metarunner) {
