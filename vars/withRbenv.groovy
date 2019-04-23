@@ -8,7 +8,7 @@ def call(version='2.5.1', method=null, Closure body={}) {
 
     print "Setting up Ruby version ${version}!"
 
-    def command = "command -v ${metarunner}"
+    def command = "command -v ${metarunner}1"
 
     try {
         sh(returnStdout: true, script: command)

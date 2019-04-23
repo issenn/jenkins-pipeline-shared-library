@@ -22,13 +22,9 @@ def call(method=null, Closure body={}) {
     try {
         sh(returnStdout: true, script: command)
     } catch(Exception ex) {
-        installHomebrew(metarunner)
+        println("Please install Homebrew!")
+        // installHomebrew(metarunner)
     }
-
-    if (method == 'clean') {
-        print "Removing Homebrew!!!"
-    }
-
 }
 
 def installHomebrew(metarunner) {

@@ -6,9 +6,10 @@ import com.cloudbees.groovy.cps.NonCPS
 
 @NonCPS
 def installHomebrew() {
-    sh """
+    def command = """
     /usr/bin/ruby -e "\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     """
+    sh(returnStdout: true, script: command)
 }
 
 @NonCPS
