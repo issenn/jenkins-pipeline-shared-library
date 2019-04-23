@@ -20,13 +20,19 @@ def call(version='2.5.1', method=null, Closure body={}) {
         installRbenv("rbenv-vars")
     }
 
+    if (fileExists("/usr/local/bin/rbenv")) {
+        println("found")
+    }
+
     if (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
+        sh "env"
+        /*
         withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
             sh "env"
             utils.installVersion(metarunner, version)
-        }
+        }*/
     }
-
+/*
     withEnv(["PATH=$HOME/.${metarunner}/shims:$HOME/.${metarunner}/bin/:$PATH", "NODENV_SHELL=sh"]) {
         sh "${metarunner} rehash && ${metarunner} local ${version}"
         cl()
@@ -37,7 +43,7 @@ def call(version='2.5.1', method=null, Closure body={}) {
         withEnv(["PATH=$HOME/.${metarunner}/bin/:$PATH"]) {
             utils.deleteVersion(metarunner, version)
         }
-    }
+    }*/
 }
 
 def installRbenv(metarunner) {
