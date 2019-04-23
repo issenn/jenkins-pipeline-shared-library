@@ -4,6 +4,11 @@ import io.issenn.jenkins.utils.utils
 
 def call(String version='2.5.1', String method=null, Closure body={}) {
     String metarunner = 'rbenv'
+
+    if (fileExists(".ruby-version")) {
+        version = readFile(file: ".ruby-version", encoding: "utf-8")
+    }
+
     def utils = new utils()
 
     print "Setting up Ruby version ${version}!"
