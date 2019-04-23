@@ -33,22 +33,15 @@ def call(String version='2.5.1', String method=null, Closure body={}) {
 
     sh "rbenv version"
 
-    /*
     withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
-        sh "${metarunner} rehash && ${metarunner} local ${version}"
+        sh "${metarunner} rehash"
         body()
     }
 
-     */
-/*
     if (method == 'clean') {
         print "Removing Ruby ${version}!!!"
-        withEnv(["PATH=$HOME/.${metarunner}/bin/:$PATH"]) {
-            utils.deleteVersion(metarunner, version)
-        }
+        utils.deleteVersion(metarunner, version)
     }
-
- */
 }
 
 def installRbenv(String metarunner) {
@@ -56,3 +49,7 @@ def installRbenv(String metarunner) {
     new utils().installMetarunnerOnMac(metarunner)
 }
 
+def purgeAll(String metarunner) {
+    print "Removing all versions of ${metarunner}"
+    new utils().purgeAllVersions(metarunner)
+}

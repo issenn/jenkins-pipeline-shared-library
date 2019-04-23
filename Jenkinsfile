@@ -40,6 +40,7 @@ pipeline {
                 // sh "env"
                 // sh "ls ${JENKINS_HOME}/"
                 withRbenv()
+                withRbenv("2.5.2", "clean")
             }
         }
     }
