@@ -46,12 +46,15 @@ pipeline {
                 withRbenv() {
                     sh "rbenv versions"
                     sh "command -v ruby"
-                    sh "command -v gem"
-                    sh "command -v bundle"
+                    sh "rbenv which ruby"
                     sh "ruby --version"
+                    sh "command -v gem"
+                    sh "rbenv which gem"
                     sh "gem --version"
-                    sh "bundle --version"
                     sh "gem install bundler"
+                    sh "command -v bundle"
+                    sh "rbenv which bundle"
+                    sh "bundle --version"
                     sh "bundle install"
                 }
             }
