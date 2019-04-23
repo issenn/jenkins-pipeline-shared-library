@@ -43,7 +43,7 @@ pipeline {
             steps {
                 // sh "env"
                 // sh "ls ${JENKINS_HOME}/"
-                withRbenv(version: "2.5.3", method: "keep") {
+                withRbenv("2.5.3") {
                     sh "rbenv version"
                     sh "ruby --version"
                 }
