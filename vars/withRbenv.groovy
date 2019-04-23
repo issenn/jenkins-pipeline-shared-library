@@ -8,14 +8,8 @@ def call(version='2.5.1', method=null, Closure body={}) {
 
     print "Setting up Ruby version ${version}!"
 
-    def command = "command -v ${metarunner} 1>/dev/null 2>&1"
+    def command = "command -v ${metarunner}"
 
-    if (!sh(returnStdout: true, script: command)) {
-        def out = sh(returnStdout: true, script: command)
-        println(out)
-    }
-
-    /*
     try {
         sh(returnStdout: true, script: command)
     } catch(Exception ex) {
@@ -27,7 +21,8 @@ def call(version='2.5.1', method=null, Closure body={}) {
     }
 
     if (!fileExists("$HOME/.${metarunner}/versions/${version}/")) {
-        withEnv(["PATH=$HOME/.${metarunner}/bin/:$PATH"]) {
+        withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH"]) {
+            sh "env"
             utils.installVersion(metarunner, version)
         }
     }
@@ -43,7 +38,6 @@ def call(version='2.5.1', method=null, Closure body={}) {
             utils.deleteVersion(metarunner, version)
         }
     }
-     */
 }
 
 def installRbenv(metarunner) {
