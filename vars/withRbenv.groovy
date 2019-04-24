@@ -34,8 +34,8 @@ def call(Map parameters = [:], String version = '2.6.3', String method = null, C
         } catch(Exception ex) {
             println(ex)
         } finally {
-            // sh "rm -rf $HOME/.${metarunner}/versions/system"
-            // sh "rm -rf $HOME/.${metarunner}/versions/${version}/gemsets"
+            sh "rm -rf $HOME/.${metarunner}/versions/system"
+            sh "rm -rf $HOME/.${metarunner}/versions/${version}/gemsets"
             sh "${metarunner} rehash"
         }
     }
@@ -62,8 +62,8 @@ def installRbenv(String metarunner, String default_ruby_version) {
         } catch(Exception ex) {
             println(ex)
         } finally {
-            // sh "rm -rf $HOME/.${metarunner}/versions/system"
-            // sh "rm -rf $HOME/.${metarunner}/versions/${default_ruby_version}/gemsets"
+            sh "rm -rf $HOME/.${metarunner}/versions/system"
+            sh "rm -rf $HOME/.${metarunner}/versions/${default_ruby_version}/gemsets"
             sh "${metarunner} global ${default_ruby_version}"
             sh "${metarunner} rehash"
         }
