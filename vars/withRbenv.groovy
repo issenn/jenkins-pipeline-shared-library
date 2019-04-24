@@ -41,9 +41,7 @@ def call(Map parameters = [:], String version = '2.6.3', String method = null, C
     }
 
     withEnv(["PATH=$HOME/.${metarunner}/shims:$PATH", "RBENV_SHELL=zsh"]) {
-        sh "ls -la $HOME/.${metarunner}/versions/${version}"
-        println('-----')
-        sh "ls -la $HOME/.${metarunner}/versions/${version} && ${metarunner} rehash"
+        // sh "${metarunner} rehash"
         body()
     }
 
