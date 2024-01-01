@@ -25,6 +25,14 @@ dependencies {
     // implementation("org.jenkins-ci.main:jenkins-core:2.277.4")
     implementation(group = "org.jenkins-ci.main", name = "jenkins-core", version = "2.277.4", ext = "jar")
     implementation(
+        group = "org.jenkins-ci.plugins.workflow", name = "workflow-cps", version = "3826.v3b_5707fe44da_", ext = "jar"
+    ) {
+        artifact {
+            name = "workflow-cps"
+            type = "jar"
+        }
+    }
+    implementation(
         group = "io.jenkins.plugins", name = "pipeline-groovy-lib", version = "689.veec561a_dee13", ext = "jar"
     ) {
         artifact {
