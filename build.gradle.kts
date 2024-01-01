@@ -1,5 +1,5 @@
 plugins {
-    id("groovy")
+    groovy
 }
 
 group = "com.issenn.jenkins"
@@ -22,31 +22,53 @@ repositories {
 
 dependencies {
     implementation("org.codehaus.groovy:groovy-all:2.4.21")
-    implementation("org.jenkins-ci.main:jenkins-core:2.277.4")
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+    // implementation("org.jenkins-ci.main:jenkins-core:2.277.4")
+    implementation(group = "org.jenkins-ci.main", name = "jenkins-core", version = "2.277.4", ext = "jar")
+    implementation(
+        group = "io.jenkins.plugins", name = "pipeline-groovy-lib", version = "689.veec561a_dee13", ext = "jar"
+    ) {
+        artifact {
+            name = "pipeline-groovy-lib"
+            type = "jar"
+        }
+    }
+    testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("com.lesfurets:jenkins-pipeline-unit:1.19")
 }
 
 sourceSets {
    main {
-       // don't add vars - it's loaded dynamic!
-       // groovy {
-       //     srcDirs("${project.rootDir}/src")
-       // }
-       groovy.srcDirs("src", "vars")
-       // resources {
-       //     srcDirs("${project.rootDir}/resources")
-       // }
-       resources.srcDir("resources")
+       java {
+           setSrcDirs(emptyList<String>())
+       }
+       // groovy.srcDirs("src", "vars")
+       groovy {
+           setSrcDirs(listOf("src", "vars"))
+       }
+       // resources.srcDir("resources")
+       resources {
+           setSrcDirs(listOf("resources"))
+       }
    }
    test {
-       // groovy {
-       //     srcDirs("${project.rootDir}/test")
-       // }
-       groovy.srcDir("test")
+       java {
+           setSrcDirs(emptyList<String>())
+       }
+       // groovy.srcDirs("test/groovy")
+       groovy {
+           setSrcDirs(listOf("test/groovy", "test/vars"))
+       }
+       // resources.srcDir("test/resources")
+       resources {
+           setSrcDirs(listOf("test/resources"))
+       }
    }
 }
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
