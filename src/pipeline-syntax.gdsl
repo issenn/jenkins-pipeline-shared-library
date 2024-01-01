@@ -146,6 +146,8 @@ contributor(closures) {
         // Todo
 
         // Some others function
+        method(name: 'library', type: Object, params: [identifier: String], doc: 'Load a shared library on the fly')
+        method(name: 'library', type: Object, namedParams: [parameter(name: 'identifier', type: String), parameter(name: 'changelog', type: Boolean), parameter(name: 'retriever', type: Map)], doc: 'Load a shared library on the fly')
         method(name: 'node', type: Object, params: [body: Closure], doc: 'Allocate node')
         // method(name: 'node', type: Object, params: [label: String, body: Closure], doc: 'Allocate node')
     }
