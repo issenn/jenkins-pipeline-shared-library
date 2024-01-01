@@ -1,6 +1,6 @@
 
 // The global script scope
-def ctx = context(scope: scriptScope())
+def ctx = context(scope: scriptScope(null))
 
 // What things can be on the script scope
 contributor(ctx) {
@@ -67,11 +67,42 @@ contributor(ctx) {
     property(name: 'currentBuild', type: 'org.jenkinsci.plugins.workflow.cps.RunWrapperBinder')
     property(name: 'scm', type: 'org.jenkinsci.plugins.workflow.multibranch.SCMVar')
 }
-//Steps that require a node context
-def nodeCtx = context(scope: closureScope())
-contributor(nodeCtx) {
-    def call = enclosingCall('node')
-    if (call) {
+
+// Define default env vars
+def envVars = context(ctype: 'org.jenkinsci.plugins.workflow.cps.EnvActionImpl.Binder')
+
+contributor(envVars) {
+    property(name: 'BRANCH_NAME', type: String, doc: 'For a multibranch project, this will be set to the name of the branch being built, for example in case you wish to deploy to production from master but not from feature branches; if corresponding to some kind of change request, the name is generally arbitrary (refer to CHANGE_ID and CHANGE_TARGET)')
+    property(name: 'CHANGE_ID', type: String, doc: 'For a multibranch project corresponding to some kind of change request, this will be set to the change ID, such as a pull request number, if supported; else unset')
+    property(name: 'CHANGE_URL', type: String, doc: 'For a multibranch project corresponding to some kind of change request, this will be set to the change URL, if supported; else unset')
+    property(name: 'CHANGE_TITLE', type: String, doc: 'For a multibranch project corresponding to some kind of change request, this will be set to the title of the change, if supported; else unset')
+    property(name: 'CHANGE_AUTHOR', type: String, doc: 'For a multibranch project corresponding to some kind of change request, this will be set to the username of the author of the proposed change, if supported; else unset')
+    property(name: 'CHANGE_AUTHOR_DISPLAY_NAME', type: String, doc: 'For a multibranch project corresponding to some kind of change request, this will be set to the human name of the author, if supported; else unset')
+    property(name: 'CHANGE_AUTHOR_EMAIL', type: String, doc: 'For a multibranch project corresponding to some kind of change request, this will be set to the email address of the author, if supported; else unset')
+    property(name: 'CHANGE_TARGET', type: String, doc: 'rFo a multibranch project corresponding to some kind of change request, this will be set to the target or base branch to which the change could be merged, if supported; else unset')
+    property(name: 'BUILD_NUMBER', type: String, doc: 'The current build number, such as "153"')
+    property(name: 'BUILD_ID', type: String, doc: 'The current build ID, identical to BUILD_NUMBER for builds created in 1.597+, but a YYYY-MM-DD_hh-mm-ss timestamp for older builds')
+    property(name: 'BUILD_DISPLAY_NAME', type: String, doc: 'The display name of the current build, which is something like "#153" by default')
+    property(name: 'JOB_NAME', type: String, doc: 'Name of the project of this build, such as "foo" or "foo/bar"')
+    property(name: 'JOB_BASE_NAME', type: String, doc: 'Short Name of the project of this build stripping off folder paths, such as "foo" for "bar/foo"')
+    property(name: 'BUILD_TAG', type: String, doc: 'String of "jenkins-${JOB_NAME}-${BUILD_NUMBER}". All forward slashes (/) in the JOB_NAME are replaced with dashes (-). Convenient to put into a resource file, a jar file, etc for easier identification')
+    property(name: 'EXECUTOR_NUMBER', type: String, doc: 'The unique number that identifies the current executor (among executors of the same machine) that’s carrying out this build. This is the number you see in the "build executor status", except that the number starts from 0, not 1')
+    property(name: 'NODE_NAME', type: String, doc: 'Name of the agent if the build is on an agent, or "master" if run on master')
+    property(name: 'NODE_LABELS', type: String, doc: 'Whitespace-separated list of labels that the node is assigned')
+    property(name: 'WORKSPACE', type: String, doc: 'The absolute path of the directory assigned to the build as a workspace')
+    property(name: 'JENKINS_HOME', type: String, doc: 'The absolute path of the directory assigned on the master node for Jenkins to store data')
+    property(name: 'JENKINS_URL', type: String, doc: 'Full URL of Jenkins, like http://server:port/jenkins/ (note: only available if Jenkins URL set in system configuration)')
+    property(name: 'BUILD_URL', type: String, doc: 'Full URL of this build, like http://server:port/jenkins/job/foo/15/ (Jenkins URL must be set)')
+    property(name: 'JOB_URL', type: String, doc: 'Full URL of this job, like http://server:port/jenkins/job/foo/ (Jenkins URL must be set)')
+}
+
+// Steps that require a node context
+// def nodeCtx = context(scope: closureScope(null))
+def closures = context(scope: closureScope(null))
+
+contributor(closures) {
+    // What things can be inside a node
+    if (enclosingCall('node')) {
         method(name: 'bat', type: 'Object', params: [script:'java.lang.String'], doc: 'Windows Batch Script')
         method(name: 'bat', type: 'Object', namedParams: [parameter(name: 'script', type: 'java.lang.String'), parameter(name: 'encoding', type: 'java.lang.String'), parameter(name: 'label', type: 'java.lang.String'), parameter(name: 'returnStatus', type: 'boolean'), parameter(name: 'returnStdout', type: 'boolean'), ], doc: 'Windows Batch Script')
         method(name: 'checkout', type: 'Object', params: [scm:'Map'], doc: 'Check out from version control')
@@ -106,6 +137,27 @@ contributor(nodeCtx) {
         method(name: 'archive', type: 'Object', namedParams: [parameter(name: 'includes', type: 'java.lang.String'), parameter(name: 'excludes', type: 'java.lang.String'), ], doc: 'Archive artifacts')
         method(name: 'unarchive', type: 'Object', params: [:], doc: 'Advanced/Deprecated Copy archived artifacts into the workspace')
         method(name: 'unarchive', type: 'Object', namedParams: [parameter(name: 'mapping', type: 'java.util.Map'), ], doc: 'Copy archived artifacts into the workspace')
+    }
+
+    // What things can be inside a pipeline
+    if (enclosingCall('pipeline')) {
+        method(name: 'agent', type: Object, params: [body: Closure], doc: 'Label expression to select agents')
+        method(name: 'environment', type: Object, params: [body: Closure], doc: 'Setting environment variables for this pipeline')
+        // Todo
+
+        // Some others function
+        method(name: 'node', type: Object, params: [body: Closure], doc: 'Allocate node')
+        // method(name: 'node', type: Object, params: [label: String, body: Closure], doc: 'Allocate node')
+    }
+
+    // The agent section
+    if (enclosingCall('agent')) {
+        property(name: 'any', 'doc': 'Use any available agent')
+        property(name: 'none', 'doc': 'No global agent defined')
+        method(name: 'node', type: Closure, 'doc': 'Same as label keyword with additional options such as customWorkspace')
+        method(name: 'label', type: String, params: [agent_name: String])
+        method(name: 'customWorkspace', type: GString, 'doc': 'Location of workspace')
+        // Todo
     }
 }
 

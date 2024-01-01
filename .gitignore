@@ -1,6 +1,13 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,vim,sublimetext,osx,macos,linux,jetbrains+iml,jetbrains+all,jetbrains,java,intellij+iml,intellij+all,intellij,groovy,gradle,kotlin,maven
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,vim,sublimetext,osx,macos,linux,jetbrains+iml,jetbrains+all,jetbrains,java,intellij+iml,intellij+all,intellij,groovy,gradle,kotlin,maven
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,vim,sublimetext,osx,maven,macos,linux,kotlin,jetbrains+iml,jetbrains+all,jetbrains,java,intellij+iml,intellij+all,intellij,groovy,gradle,backup
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,vim,sublimetext,osx,maven,macos,linux,kotlin,jetbrains+iml,jetbrains+all,jetbrains,java,intellij+iml,intellij+all,intellij,groovy,gradle,backup
+
+### Backup ###
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
 
 ### Groovy ###
 # .gitignore created from Groovy contributors in https://github.com/apache/groovy/blob/master/.gitignore
@@ -643,7 +650,7 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,vim,sublimetext,osx,macos,linux,jetbrains+iml,jetbrains+all,jetbrains,java,intellij+iml,intellij+all,intellij,groovy,gradle,kotlin,maven
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,vim,sublimetext,osx,maven,macos,linux,kotlin,jetbrains+iml,jetbrains+all,jetbrains,java,intellij+iml,intellij+all,intellij,groovy,gradle,backup
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
