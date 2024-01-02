@@ -1,9 +1,12 @@
 plugins {
     groovy
+    `maven-publish`
+    distribution
 }
 
 group = "com.issenn.jenkins"
-version = "1.0-SNAPSHOT"
+// version = "1.0-SNAPSHOT"
+version = "1.0.1"
 
 repositories {
     // https://repo.maven.apache.org/maven2/
@@ -78,5 +81,34 @@ tasks.test {
     useJUnitPlatform()
     testLogging {
         events("passed", "skipped", "failed")
+    }
+}
+
+distributions {
+    main {
+        contents {
+            from(".")
+            into("/")
+            setIncludes(listOf("src/**", "vars/**"))
+        }
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("Distribution") {
+            artifact(tasks.distZip.get())
+        }
+    }
+
+    repositories {
+        maven {
+            setUrl("http://192.168.1.58:8081/repository/maven-releases/")
+            credentials {
+                username = project.findProperty("nexusUsername") as String? ?: System.getenv("NEXUS_USERNAME")
+                password = project.findProperty("nexusPassword") as String? ?: System.getenv("NEXUS_PASSWORD")
+            }
+            isAllowInsecureProtocol = true
+        }
     }
 }
