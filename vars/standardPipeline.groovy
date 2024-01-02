@@ -1,6 +1,11 @@
 #!groovy
 
-def call(Map map) {
+def call(args=[:]) {
+    // args = [
+    //     wrapper: 'default',
+    //     labels: []
+    // ] << args
+
     pipeline {
         agent {
             label 'master'
