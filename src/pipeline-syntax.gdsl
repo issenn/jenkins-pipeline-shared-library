@@ -161,6 +161,22 @@ contributor(closures) {
         method(name: 'customWorkspace', type: GString, 'doc': 'Location of workspace')
         // Todo
     }
+
+    // Only inside steps
+    if (enclosingCall("steps") || enclosingCall("always") || enclosingCall("success") ||
+        enclosingCall("failure") || enclosingCall("unstable") || enclosingCall("changed")) {
+        method(name: 'archiveArtifacts', type: Object,
+            namedParams: [parameter(name: 'artifacts', type: String, doc: 'Use comma separator to set a list of patterns'),
+                          parameter(name: 'excludes', type: String, doc: 'Use comma separator to set a list of patterns'),
+                          parameter(name: 'allowEmptyArchive', type: Boolean),
+                          parameter(name: 'caseSensitive', type: Boolean),
+                          parameter(name: 'defaultExcludes', type: Boolean),
+                          parameter(name: 'fingerprint', type: Boolean),
+                          parameter(name: 'followSymlinks', type: Boolean),
+                          parameter(name: 'onlyIfSuccessful', type: Boolean)
+            ]
+        )
+    }
 }
 
 // Errors on:

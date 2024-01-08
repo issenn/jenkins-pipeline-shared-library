@@ -1,12 +1,12 @@
 plugins {
     groovy
-    `maven-publish`
     distribution
+    `maven-publish`
 }
 
 group = "com.issenn.jenkins"
-// version = "1.0-SNAPSHOT"
-version = "1.0.1"
+version = "1.0.0-SNAPSHOT"
+// version = "1.0.10"
 
 repositories {
     // https://repo.maven.apache.org/maven2/
@@ -27,6 +27,14 @@ dependencies {
     implementation("org.codehaus.groovy:groovy-all:2.4.21")
     // implementation("org.jenkins-ci.main:jenkins-core:2.277.4")
     implementation(group = "org.jenkins-ci.main", name = "jenkins-core", version = "2.277.4", ext = "jar")
+    // implementation(
+    //     group = "org.jenkins-ci", name = "symbol-annotation", version = "1.24", ext = "jar"
+    // ) {
+    //     artifact {
+    //         name = "symbol-annotation"
+    //         type = "jar"
+    //     }
+    // }
     implementation(
         group = "org.jenkins-ci.plugins.workflow", name = "workflow-cps", version = "3826.v3b_5707fe44da_", ext = "jar"
     ) {
@@ -90,6 +98,7 @@ distributions {
             from(".")
             into("/")
             setIncludes(listOf("src/**", "vars/**"))
+            setExcludes(listOf("pipeline-syntax.gdsl", "**/*.bak"))
         }
     }
 }
@@ -103,11 +112,22 @@ publishing {
 
     repositories {
         maven {
-            setUrl("http://192.168.1.58:8081/repository/maven-releases/")
-            credentials {
-                username = project.findProperty("nexusUsername") as String? ?: System.getenv("NEXUS_USERNAME")
-                password = project.findProperty("nexusPassword") as String? ?: System.getenv("NEXUS_PASSWORD")
+            // setUrl(project.findProperty("mavenRepoURL") as String? ?: System.getenv("MAVEN_REPO_URL"))
+            val repoURL = project.findProperty("mavenRepoURL") as String? ?: System.getenv("MAVEN_REPO_URL") ?: ""
+            val releasesRepoUrl = repoURL + "maven-releases"
+            val snapshotsRepoUrl = repoURL + "maven-snapshots"
+            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+            credentials(PasswordCredentials::class) {
+                username = project.findProperty("mavenUsername") as String? ?: System.getenv("MAVEN_USERNAME")
+                password = project.findProperty("mavenPassword") as String? ?: System.getenv("MAVEN_PASSWORD")
             }
+            // credentials(HttpHeaderCredentials::class) {
+            //     name = "Authorization"
+            //     value = "Bearer 6466db12-4f0d-3fb2-a3a8-54735e6d683b"
+            // }
+            // authentication {
+            //     create<HttpHeaderAuthentication>("header")
+            // }
             isAllowInsecureProtocol = true
         }
     }

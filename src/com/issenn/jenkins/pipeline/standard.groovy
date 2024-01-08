@@ -1,6 +1,6 @@
 package com.issenn.jenkins.pipeline
 
-def call(body) {
+def call(Closure body={}) {
     pipeline {
         agent {
             label 'master'
@@ -9,7 +9,7 @@ def call(body) {
         stages {
             stage('Hello') {
                 steps {
-                    echo 'Hello World'
+                    echo 'Hello, I am Issenn.'
                 }
             }
         }
