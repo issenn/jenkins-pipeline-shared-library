@@ -113,9 +113,9 @@ publishing {
     repositories {
         maven {
             // setUrl(project.findProperty("mavenRepoURL") as String? ?: System.getenv("MAVEN_REPO_URL"))
-            val repoURL = project.findProperty("mavenRepoURL") as String? ?: System.getenv("MAVEN_REPO_URL") ?: ""
-            val releasesRepoUrl = repoURL + "maven-releases"
-            val snapshotsRepoUrl = repoURL + "maven-snapshots"
+            val repoUrl = project.findProperty("mavenRepoUrl") as String? ?: System.getenv("MAVEN_REPO_URL") ?: ""
+            val releasesRepoUrl = repoUrl + "maven-releases"
+            val snapshotsRepoUrl = repoUrl + "maven-snapshots"
             url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
             credentials(PasswordCredentials::class) {
                 username = project.findProperty("mavenUsername") as String? ?: System.getenv("MAVEN_USERNAME")
@@ -129,6 +129,14 @@ publishing {
             //     create<HttpHeaderAuthentication>("header")
             // }
             isAllowInsecureProtocol = true
+            // metadataSources {
+            //     // ignoreGradleMetadataRedirection()
+            //     isArtifactEnabled()
+            // }
         }
     }
 }
+
+// tasks.withType<GenerateModuleMetadata> {
+//     enabled = false
+// }

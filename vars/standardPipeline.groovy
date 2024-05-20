@@ -2,6 +2,13 @@
 
 import com.issenn.jenkins.security.PAM
 
+// import java.nio.charset.Charset
+
+// def decode = { String url ->
+//     URLDecoder.decode(url, 'UTF-8')
+//     // URLDecoder.decode(url, Charset.forName('UTF-8', Charset.defaultCharset()))
+// }
+
 def call(Map args=[:], Closure body={}) {
     def config = [
         wrapper: 'default',
